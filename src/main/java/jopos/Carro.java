@@ -73,28 +73,28 @@ public class Carro {
         this.statusDisponivel = statusDisponivel;
     }
     
-    public void adicionar(Carro carro) throws ClassNotFoundException, SQLException {
-        Conexao connm = new Conexao();
-        try (Connection conn = connm.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(
-                        "INSERT INTO Carro (id, marca, modelo, ano, placa, statusDisponivel)"
-                        + "VALUES (?,?,?,?,?,?) ")) {
-            stmt.setInt(1, carro.getId());
-            stmt.setString(2, carro.getMarca());
-            stmt.setString(3, carro.getModelo());
-            stmt.setString(4, carro.getAno());
-            stmt.setString(6, carro.getPlaca());
-            stmt.setString(7, carro.getStatusDisponivel());
+public void adicionar(Carro carro) throws ClassNotFoundException, SQLException {
+    Conexao connm = new Conexao();
+    try (Connection conn = connm.obterConexao();
+            PreparedStatement stmt = conn.prepareStatement(
+                    "INSERT INTO Carro (id, marca, modelo, ano, placa, statusDisponivel)"
+                    + "VALUES (?,?,?,?,?,?) ")) {
+        stmt.setInt(1, carro.getId());
+        stmt.setString(2, carro.getMarca());
+        stmt.setString(3, carro.getModelo());
+        stmt.setString(4, carro.getAno());
+        stmt.setString(6, carro.getPlaca());
+        stmt.setString(7, carro.getStatusDisponivel());
 
-            int status = stmt.executeUpdate();
+        int status = stmt.executeUpdate();
 
-            conn.close();
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        } catch (ClassNotFoundException ex) {
-            System.err.println(ex.getMessage());
-        }
+        conn.close();
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    } catch (ClassNotFoundException ex) {
+        System.err.println(ex.getMessage());
     }
+}
     
     public void excluir() throws ClassNotFoundException, SQLException {
         Conexao connm = new Conexao();
